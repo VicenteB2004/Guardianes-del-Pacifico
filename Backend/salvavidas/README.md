@@ -53,27 +53,6 @@ API REST para sistema de gestión de salvavidas con NestJS 10+
 cp .env.example .env
 ```
 
-### 2. Configurar variables de entorno
-
-```
-# Database
-DB_HOST=localhost
-DB_PORT=5432
-DB_USERNAME=postgres
-DB_PASSWORD=postgres
-DB_DATABASE=salvavidas
-
-# JWT
-JWT_SECRET=your-super-secret-key-change-this
-JWT_EXPIRES_IN=7d
-JWT_REFRESH_SECRET=your-refresh-secret-key
-JWT_REFRESH_EXPIRES_IN=30d
-
-# Server
-NODE_ENV=development
-PORT=3000
-```
-
 ### 3. Instalar dependencias
 
 ```bash
