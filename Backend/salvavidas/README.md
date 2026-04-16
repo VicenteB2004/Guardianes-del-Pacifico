@@ -261,19 +261,6 @@ npm run typeorm migration:run
 npm run typeorm migration:revert
 ```
 
-## Próximos Pasos
-
-- [ ] Implementar User Entity y Repository
-- [ ] Crear DTOs para validación
-- [ ] Implementar Bcrypt para password hashing
-- [ ] Implementar Swagger/OpenAPI
-- [ ] Agregar class-validator para validaciones
-- [ ] Crear migraciones de BD
-- [ ] Implementar CORS en main.ts
-- [ ] Agregar rate limiting
-- [ ] Configurar logging global
-- [ ] Implementar manejo de errores personalizado
-
 ## Recursos
 
 - [NestJS Documentation](https://docs.nestjs.com)
