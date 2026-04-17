@@ -1,0 +1,14 @@
+# Node
+node_modules/
+frontend/salvavidas/node_modules/
+
+# Builds
+dist/
+build/
+
+# Logs
+*.log
+
+# Sistema
+.DS_Store
+Thumbs.db
