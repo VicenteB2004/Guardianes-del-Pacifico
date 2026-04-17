@@ -1,0 +1,153 @@
+<div class="page-container">
+  <div class="page-header">
+    <h1>⚙️ Configuración</h1>
+  </div>
+
+  <!-- Estadísticas de la Plataforma -->
+  <div class="stats-grid">
+    <app-card
+      icon="👥"
+      title="Usuarios Activos"
+      value="24"
+      subtitle="Online ahora"
+      accentColor="primary">
+    </app-card>
+    <app-card
+      icon="📅"
+      title="Última Actualización"
+      value="2026-02-20"
+      subtitle="Sistema actualizado"
+      accentColor="success">
+    </app-card>
+    <app-card
+      icon="📦"
+      title="Versión del Sistema"
+      value="2.1.0"
+      subtitle="Última versión"
+      accentColor="primary">
+    </app-card>
+    <app-card
+      icon="✅"
+      title="Tiempo de Actividad"
+      value="99.8%"
+      subtitle="Disponibilidad del sistema"
+      accentColor="success">
+    </app-card>
+  </div>
+
+  <!-- Configuración General -->
+  <section class="config-section">
+    <h2>Información General</h2>
+    <form class="config-form">
+      <div class="form-group">
+        <label for="nombre">Nombre del Sistema</label>
+        <input 
+          type="text" 
+          id="nombre" 
+          class="form-control"
+          [value]="nombreSistema()">
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email de Contacto</label>
+        <input 
+          type="email" 
+          id="email" 
+          class="form-control"
+          [value]="emailContacto()">
+      </div>
+
+      <div class="form-group">
+        <label for="telefono">Teléfono de Emergencia</label>
+        <input 
+          type="tel" 
+          id="telefono" 
+          class="form-control"
+          [value]="telefonoEmergencia()">
+      </div>
+
+      <div class="form-buttons">
+        <button type="button" class="btn btn-primary" (click)="guardarCambios()">
+          💾 Guardar Cambios
+        </button>
+        <button type="button" class="btn btn-secondary">
+          ↩ Cancelar
+        </button>
+      </div>
+    </form>
+  </section>
+
+  <!-- Configuraciones de Sistema -->
+  <section class="config-section">
+    <h2>Opciones del Sistema</h2>
+    <div class="config-list">
+      <div 
+        *ngFor="let config of configuraciones(); let i = index" 
+        class="config-item">
+        <div class="config-info">
+          <h4>{{ config.nombre }}</h4>
+          <p class="config-desc">{{ config.descripcion }}</p>
+        </div>
+        
+        <div class="config-control">
+          <div *ngIf="config.tipo === 'boolean'" class="toggle-switch">
+            <input 
+              type="checkbox" 
+              [id]="'toggle-' + i"
+              [checked]="config.valor"
+              (change)="toggleConfiguracion(i)"
+              class="toggle-input">
+            <label [for]="'toggle-' + i" class="toggle-label"></label>
+          </div>
+
+          <div *ngIf="config.tipo === 'texto'" class="select-control">
+            <input 
+              type="text" 
+              class="form-control"
+              [value]="config.valor"
+              readonly>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-buttons">
+      <button type="button" class="btn btn-primary" (click)="guardarCambios()">
+        💾 Aplicar Configuración
+      </button>
+      <button type="button" class="btn btn-danger" (click)="resetearDefaults()">
+        🔄 Restaurar Valores Predeterminados
+      </button>
+    </div>
+  </section>
+
+  <!-- Seguridad y Respaldo -->
+  <section class="config-section">
+    <h2>Seguridad y Respaldo</h2>
+    <div class="security-grid">
+      <div class="security-card">
+        <h3>🔐 Contraseña</h3>
+        <p>Cambiar la contraseña de administrador</p>
+        <button class="btn btn-secondary">Cambiar Contraseña</button>
+      </div>
+
+      <div class="security-card">
+        <h3>🔑 Claves de API</h3>
+        <p>Administrar claves de acceso a la API</p>
+        <button class="btn btn-secondary">Administrar Claves</button>
+      </div>
+
+      <div class="security-card">
+        <h3>💾 Respaldos</h3>
+        <p>Crear y restaurar copias de seguridad</p>
+        <button class="btn btn-secondary">Administrar Respaldos</button>
+      </div>
+
+      <div class="security-card">
+        <h3>📋 Registros</h3>
+        <p>Ver registro de auditoría del sistema</p>
+        <button class="btn btn-secondary">Ver Registros</button>
+      </div>
+    </div>
+  </section>
+</div>

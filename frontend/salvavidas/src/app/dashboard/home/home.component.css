@@ -1,0 +1,247 @@
+.home-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* ========================
+   WELCOME SECTION
+   ======================== */
+
+.welcome-section {
+  background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-ocean) 100%);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  color: white;
+  box-shadow: var(--shadow-md);
+}
+
+.welcome-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.welcome-header h1 {
+  color: white;
+  margin: 0 0 0.5rem 0;
+}
+
+.welcome-subtitle {
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.quick-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.quick-actions .btn {
+  background-color: rgba(255, 255, 255, 0.15) !important;
+  color: white !important;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 0.75rem 1.25rem;
+  font-size: 0.9rem;
+}
+
+.quick-actions .btn:hover {
+  background-color: rgba(255, 255, 255, 0.25) !important;
+}
+
+.quick-actions .btn-danger {
+  background-color: var(--alert-orange) !important;
+  border-color: var(--alert-orange);
+}
+
+/* ========================
+   METRICS SECTION
+   ======================== */
+
+.metrics-section h2 {
+  margin-bottom: 1.5rem;
+  color: var(--primary-dark);
+}
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+/* ========================
+   INCIDENTS SECTION
+   ======================== */
+
+.incidents-section h2 {
+  margin-bottom: 1.5rem;
+  color: var(--primary-dark);
+}
+
+.incidents-table {
+  background-color: white;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+}
+
+.table-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1rem;
+  padding: 1.25rem 1.5rem;
+  background-color: var(--gray-light);
+  font-weight: 600;
+  color: var(--primary-dark);
+  border-bottom: 2px solid var(--gray-medium);
+}
+
+.table-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1rem;
+  padding: 1.25rem 1.5rem;
+  align-items: center;
+  border-bottom: 1px solid var(--gray-light);
+  transition: var(--transition);
+}
+
+.table-row:last-child {
+  border-bottom: none;
+}
+
+.table-row:hover {
+  background-color: var(--gray-light);
+}
+
+.col-type {
+  font-weight: 500;
+  color: var(--primary-dark);
+}
+
+.col-time {
+  color: var(--gray-dark);
+  font-size: 0.95rem;
+}
+
+.col-status {
+  text-align: right;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  background-color: var(--gray-light);
+  color: var(--gray-dark);
+}
+
+.status-resuelto {
+  background-color: #dcfce7;
+  color: #16a34a;
+}
+
+.status-en-progreso {
+  background-color: #fef3c7;
+  color: #d97706;
+}
+
+.status-pendiente {
+  background-color: #fee2e2;
+  color: #dc2626;
+}
+
+/* ========================
+   RESPONSIVE
+   ======================== */
+
+@media (max-width: 1024px) {
+  .metrics-grid {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  }
+
+  .welcome-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 768px) {
+  .home-container {
+    gap: 1.5rem;
+  }
+
+  .welcome-section {
+    padding: 1.5rem;
+  }
+
+  .welcome-header {
+    gap: 1rem;
+  }
+
+  .quick-actions {
+    width: 100%;
+  }
+
+  .quick-actions .btn {
+    flex: 1;
+    justify-content: center;
+    min-width: calc(50% - 0.5rem);
+  }
+
+  .metrics-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .table-header,
+  .table-row {
+    grid-template-columns: 0.8fr 1fr 1fr;
+    gap: 0.75rem;
+    padding: 1rem;
+    font-size: 0.9rem;
+  }
+
+  .col-status {
+    text-align: left;
+  }
+
+  .table-header {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .quick-actions .btn {
+    min-width: 100%;
+  }
+
+  .table-header {
+    grid-template-columns: 1fr 0.8fr 0.8fr;
+    padding: 0.75rem;
+    font-size: 0.85rem;
+    gap: 0.5rem;
+  }
+
+  .table-row {
+    grid-template-columns: 1fr 0.8fr 0.8fr;
+    padding: 0.75rem;
+    gap: 0.5rem;
+  }
+
+  .col-type,
+  .col-time {
+    font-size: 0.85rem;
+  }
+
+  .status-badge {
+    font-size: 0.7rem;
+    padding: 0.3rem 0.6rem;
+  }
+}

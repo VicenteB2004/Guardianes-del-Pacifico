@@ -1,0 +1,103 @@
+<div class="page-container">
+  <div class="page-header">
+    <h1><span class="material-icons-outlined">calendar_month</span> Reuniones</h1>
+    <button class="btn btn-primary" (click)="abrirModalCrear()"><span class="material-icons-outlined">add</span> Nueva Reunión</button>
+  </div>
+
+  <!-- Stats Cards -->
+  <div class="stats-grid">
+    <app-card
+      icon="calendar_month"
+      title="Total de Reuniones"
+      [value]="stats().totalReuniones"
+      subtitle="Mes en curso"
+      accentColor="primary">
+    </app-card>
+    <app-card
+      icon="schedule"
+      title="Próxima Reunión"
+      [value]="stats().proximaReunion"
+      subtitle="Coordinar rescate"
+      accentColor="warning">
+    </app-card>
+    <app-card
+      icon="people"
+      title="Asistentes Promedio"
+      [value]="stats().asistentesPromedio"
+      subtitle="Por reunión"
+      accentColor="success">
+    </app-card>
+  </div>
+
+  <!-- Reuniones Table -->
+  <section class="reuniones-section">
+    <h2>Próximas Reuniones</h2>
+    <div class="table-container">
+      <table class="reuniones-table">
+        <thead>
+          <tr>
+            <th>Título</th>
+            <th>Fecha</th>
+            <th>Hora</th>
+            <th>Ubicación</th>
+            <th>Asistentes</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let reunion of reuniones()">
+            <td class="titulo">{{ reunion.titulo }}</td>
+            <td>{{ reunion.fecha | date: 'dd/MM/yyyy' }}</td>
+            <td>{{ reunion.hora }}</td>
+            <td>{{ reunion.ubicacion }}</td>
+            <td class="text-center">{{ reunion.asistentes }}</td>
+            <td>
+              <span class="status-badge" [class]="'status-' + reunion.estado">
+                {{ reunion.estado === 'en-progreso' ? 'En Progreso' : reunion.estado === 'pendiente' ? 'Pendiente' : 'Completada' }}
+              </span>
+            </td>
+            <td class="acciones">
+              <button class="btn-action" title="Editar" (click)="abrirModalEditar(reunion)"><span class="material-icons-outlined">edit</span></button>
+              <button class="btn-action delete" title="Eliminar" (click)="eliminarReunion(reunion.id)"><span class="material-icons-outlined">delete</span></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Modal -->
+  <app-modal
+    [isOpen]="modalAbierto()"
+    [title]="editandoId() ? 'Editar Reunión' : 'Nueva Reunión'"
+    (onClose)="cerrarModal()"
+    (onSubmit)="guardarReunion()">
+    <div class="form-group">
+      <label>Título</label>
+      <input type="text" class="form-control" [(ngModel)]="formData().titulo" required>
+    </div>
+    <div class="form-group">
+      <label>Fecha</label>
+      <input type="date" class="form-control" [(ngModel)]="formData().fecha" required>
+    </div>
+    <div class="form-group">
+      <label>Hora</label>
+      <input type="time" class="form-control" [(ngModel)]="formData().hora" required>
+    </div>
+    <div class="form-group">
+      <label>Ubicación</label>
+      <input type="text" class="form-control" [(ngModel)]="formData().ubicacion" required>
+    </div>
+    <div class="form-group">
+      <label>Asistentes</label>
+      <input type="number" class="form-control" [(ngModel)]="formData().asistentes" required>
+    </div>
+    <div class="form-group">
+      <label>Estado</label>
+      <select class="form-control" [(ngModel)]="formData().estado">
+        <option *ngFor="let estado of estados">{{ estado }}</option>
+      </select>
+    </div>
+  </app-modal>
+</div>

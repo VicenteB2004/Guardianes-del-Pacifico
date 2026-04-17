@@ -1,0 +1,104 @@
+<div class="page-container">
+  <div class="page-header">
+    <h1><span class="material-icons-outlined">trending_up</span> Reportes</h1>
+    <button class="btn btn-primary" (click)="abrirModalCrear()"><span class="material-icons-outlined">add</span> Generar Reporte</button>
+  </div>
+
+  <!-- Stats Cards -->
+  <div class="stats-grid">
+    <app-card
+      icon="description"
+      title="Total de Reportes"
+      [value]="stats().totalReportes"
+      subtitle="Todos los tiempos"
+      accentColor="primary">
+    </app-card>
+    <app-card
+      icon="check_circle"
+      title="Reportes Publicados"
+      [value]="stats().publicados"
+      subtitle="Disponibles para descargar"
+      accentColor="success">
+    </app-card>
+    <app-card
+      icon="pending"
+      title="En Revisión"
+      [value]="stats().enRevision"
+      subtitle="Pendientes de aprobar"
+      accentColor="warning">
+    </app-card>
+    <app-card
+      icon="draft"
+      title="Borradores"
+      [value]="stats().borradores"
+      subtitle="En edición"
+      accentColor="primary">
+    </app-card>
+  </div>
+
+  <!-- Reportes Table -->
+  <section class="reportes-section">
+    <h2>Reportes Generados</h2>
+    <div class="table-container">
+      <table class="reportes-table">
+        <thead>
+          <tr>
+            <th>Título</th>
+            <th>Tipo</th>
+            <th>Autor</th>
+            <th>Fecha</th>
+            <th>Estado</th>
+            <th>Descargas</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let reporte of reportes()">
+            <td class="titulo">{{ reporte.titulo }}</td>
+            <td>{{ reporte.tipo }}</td>
+            <td>{{ reporte.autor }}</td>
+            <td>{{ reporte.fecha | date: 'dd/MM/yyyy' }}</td>
+            <td>
+              <span class="status-badge" [class]="'status-' + reporte.estado">
+                {{ reporte.estado === 'borrador' ? 'Borrador' : reporte.estado === 'revisión' ? 'Revisión' : 'Publicado' }}
+              </span>
+            </td>
+            <td class="text-center">{{ reporte.descargas }}</td>
+            <td class="acciones">
+              <button class="btn-action" title="Editar" (click)="abrirModalEditar(reporte)"><span class="material-icons-outlined">edit</span></button>
+              <button class="btn-action delete" title="Eliminar" (click)="eliminarReporte(reporte.id)"><span class="material-icons-outlined">delete</span></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Modal -->
+  <app-modal
+    [isOpen]="modalAbierto()"
+    [title]="editandoId() ? 'Editar Reporte' : 'Nuevo Reporte'"
+    (onClose)="cerrarModal()"
+    (onSubmit)="guardarReporte()">
+    <div class="form-group">
+      <label>Título</label>
+      <input type="text" class="form-control" [(ngModel)]="formData().titulo" required>
+    </div>
+    <div class="form-group">
+      <label>Autor</label>
+      <input type="text" class="form-control" [(ngModel)]="formData().autor" required>
+    </div>
+    <div class="form-group">
+      <label>Tipo</label>
+      <select class="form-control" [(ngModel)]="formData().tipo">
+        <option *ngFor="let tipo of tipos">{{ tipo }}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Estado</label>
+      <select class="form-control" [(ngModel)]="formData().estado">
+        <option *ngFor="let estado of estados">{{ estado }}</option>
+      </select>
+    </div>
+  </app-modal>
+</div>

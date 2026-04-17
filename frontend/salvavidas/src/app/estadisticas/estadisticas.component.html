@@ -1,0 +1,106 @@
+<div class="page-container">
+  <div class="page-header">
+    <h1>📊 Estadísticas</h1>
+  </div>
+
+  <!-- Estadísticas Generales -->
+  <div class="stats-grid">
+    <app-card
+      icon="🚨"
+      title="Total Rescates"
+      value="46"
+      subtitle="Últimos 5 meses"
+      accentColor="danger">
+    </app-card>
+    <app-card
+      icon="✅"
+      title="Tasa de Éxito"
+      value="98.5%"
+      subtitle="Operaciones exitosas"
+      accentColor="success">
+    </app-card>
+    <app-card
+      icon="⏱"
+      title="Tiempo Promedio"
+      value="4.2"
+      subtitle="Minutos de respuesta"
+      accentColor="primary">
+    </app-card>
+    <app-card
+      icon="⚠"
+      title="Incidentes Críticos"
+      value="8"
+      subtitle="Requieren seguimiento"
+      accentColor="warning">
+    </app-card>
+  </div>
+
+  <!-- Rescates por Tipo -->
+  <section class="estadisticas-section">
+    <h2>Rescates por Tipo de Incidente</h2>
+    <div class="tipo-grid">
+      <div *ngFor="let tipo of rescatesPorTipo()" class="tipo-card">
+        <div class="tipo-header">
+          <h3>{{ tipo.tipo }}</h3>
+          <span class="cantidad-badge">{{ tipo.cantidad }}</span>
+        </div>
+        <div class="tipo-bar-container">
+          <div class="tipo-bar">
+            <div class="tipo-bar-fill" [style.width.%]="tipo.porcentaje"></div>
+          </div>
+          <span class="tipo-percentage">{{ tipo.porcentaje }}%</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Métricas Mensuales -->
+  <section class="estadisticas-section">
+    <h2>Métricas Mensuales</h2>
+    <div class="tabla-contenedor">
+      <table class="tabla-metricas">
+        <thead>
+          <tr>
+            <th>Mes</th>
+            <th>Rescates</th>
+            <th>Incidentes</th>
+            <th>Patrullas</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let metrica of metricas()">
+            <td class="mes">{{ metrica.mes }}</td>
+            <td class="rescates">
+              <span class="badge-rescates">{{ metrica.rescates }}</span>
+            </td>
+            <td class="incidentes">
+              <span class="badge-incidentes">{{ metrica.incidentes }}</span>
+            </td>
+            <td class="patrullas">
+              {{ metrica.patrullas }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Incidentes Recientes -->
+  <section class="estadisticas-section">
+    <h2>Incidentes Recientes</h2>
+    <div class="incidentes-list">
+      <div *ngFor="let incidente of incidentes()" class="incidente-row">
+        <div class="incidente-info">
+          <div class="incidente-tipo">{{ incidente.tipo }}</div>
+          <p class="incidente-ubicacion">📍 {{ incidente.ubicacion }}</p>
+        </div>
+        <div class="incidente-fecha">
+          <span>{{ incidente.fecha | date: 'dd/MM/yyyy' }}</span>
+        </div>
+        <div class="incidente-estado">
+          <span *ngIf="incidente.resuelto" class="estado-badge resuelto">✓ Resuelto</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

@@ -1,0 +1,16 @@
+<div class="layout-container">
+  <!-- Header -->
+  <app-header (toggleSidebar)="toggleSidebar()"></app-header>
+
+  <div class="layout-body">
+    <!-- Sidebar -->
+    <app-sidebar [isOpen]="isSidebarOpen()"></app-sidebar>
+
+    <!-- Main Content -->
+    <main class="main-content" [class.sidebar-closed]="!isSidebarOpen()">
+      <div class="content-wrapper">
+        <router-outlet></router-outlet>
+      </div>
+    </main>
+  </div>
+</div>

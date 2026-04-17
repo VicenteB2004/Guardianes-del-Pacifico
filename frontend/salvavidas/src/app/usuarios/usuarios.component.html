@@ -1,0 +1,76 @@
+<div class="page-container">
+  <div class="page-header">
+    <h1><span class="material-icons-outlined">people</span> Usuarios</h1>
+    <button class="btn btn-primary" (click)="abrirModalCrear()"><span class="material-icons-outlined">add</span>Nuevo Usuario</button>
+  </div>
+
+  <!-- Stats Cards -->
+  <div class="stats-grid">
+    <app-card icon="people" title="Total Usuarios" value="24" subtitle="En el sistema" accentColor="primary"></app-card>
+    <app-card icon="check_circle" title="Usuarios Activos" value="18" subtitle="Habilitados" accentColor="success"></app-card>
+    <app-card icon="pause_circle" title="Usuarios Inactivos" value="5" subtitle="Deshabilitados" accentColor="warning"></app-card>
+    <app-card icon="block" title="Usuarios Suspendidos" value="1" subtitle="Bloqueados" accentColor="danger"></app-card>
+  </div>
+
+  <!-- Usuarios Table -->
+  <section class="usuarios-section">
+    <h2>Directorio de Usuarios</h2>
+    <div class="tabla-contenedor">
+      <table class="tabla-usuarios">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Rol</th>
+            <th>Estado</th>
+            <th>Registro</th>
+            <th>Última Actividad</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let usuario of usuarios()">
+            <td class="nombre">{{ usuario.nombre }}</td>
+            <td>{{ usuario.email }}</td>
+            <td><span class="rol-badge">{{ usuario.rol }}</span></td>
+            <td><span class="estado-badge" [class]="'estado-' + usuario.estado">{{ usuario.estado }}</span></td>
+            <td class="fecha">{{ usuario.fechaRegistro | date: 'dd/MM/yyyy' }}</td>
+            <td class="fecha">{{ usuario.ultimaActividad }}</td>
+            <td class="acciones">
+              <button class="btn-action" title="Editar" (click)="abrirModalEditar(usuario)"><span class="material-icons-outlined">edit</span></button>
+              <button class="btn-action delete" title="Eliminar" (click)="eliminarUsuario(usuario.id)"><span class="material-icons-outlined">delete</span></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Modal -->
+  <app-modal
+    [isOpen]="modalAbierto()"
+    [title]="editandoId() ? 'Editar Usuario' : 'Nuevo Usuario'"
+    (onClose)="cerrarModal()"
+    (onSubmit)="guardarUsuario()">
+    <div class="form-group">
+      <label>Nombre</label>
+      <input type="text" class="form-control" [(ngModel)]="formData().nombre" required>
+    </div>
+    <div class="form-group">
+      <label>Email</label>
+      <input type="email" class="form-control" [(ngModel)]="formData().email" required>
+    </div>
+    <div class="form-group">
+      <label>Rol</label>
+      <select class="form-control" [(ngModel)]="formData().rol">
+        <option *ngFor="let rol of roles">{{ rol }}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Estado</label>
+      <select class="form-control" [(ngModel)]="formData().estado">
+        <option *ngFor="let estado of estados">{{ estado }}</option>
+      </select>
+    </div>
+  </app-modal>
+</div>

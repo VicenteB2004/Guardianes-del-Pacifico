@@ -1,0 +1,84 @@
+<div class="page-container">
+  <div class="page-header">
+    <h1><span class="material-icons-outlined">photo_library</span> Galería</h1>
+    <button class="btn btn-primary" (click)="abrirModalCrear()"><span class="material-icons-outlined">add</span> Subir Foto</button>
+  </div>
+
+  <!-- Stats Cards -->
+  <div class="stats-grid">
+    <app-card
+      icon="photo_library"
+      title="Total de Fotos"
+      [value]="stats().totalFotos"
+      subtitle="En la galería"
+      accentColor="primary">
+    </app-card>
+    <app-card
+      icon="camera_alt"
+      title="Eventos Capturados"
+      [value]="stats().eventosCapturados"
+      subtitle="Diferentes eventos"
+      accentColor="success">
+    </app-card>
+    <app-card
+      icon="storage"
+      title="Espacio Usado"
+      [value]="stats().espacioUsado"
+      subtitle="En almacenamiento"
+      accentColor="warning">
+    </app-card>
+    <app-card
+      icon="⬆"
+      title="Última Subida"
+      [value]="stats().ultimaSubida"
+      subtitle="Actualización reciente"
+      accentColor="primary">
+    </app-card>
+  </div>
+
+  <!-- Fotos Grid -->
+  <section class="galeria-section">
+    <h2>Fotos Recientes</h2>
+    <div class="fotos-grid">
+      <div *ngFor="let foto of fotos()" class="foto-card">
+        <div class="foto-placeholder">
+          <span>🖼️</span>
+        </div>
+        <div class="foto-info">
+          <h4>{{ foto.titulo }}</h4>
+          <p class="evento">{{ foto.evento }}</p>
+          <div class="foto-footer">
+            <span class="fecha">{{ foto.fecha | date: 'dd/MM/yyyy' }}</span>
+            <span class="tamano">{{ foto.tamano }}</span>
+          </div>
+          <div class="foto-actions">
+            <button class="btn-action" title="Editar" (click)="abrirModalEditar(foto)"><span class="material-icons-outlined">edit</span></button>
+            <button class="btn-action delete" title="Eliminar" (click)="eliminarFoto(foto.id)"><span class="material-icons-outlined">delete</span></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Modal -->
+  <app-modal
+    [isOpen]="modalAbierto()"
+    [title]="editandoId() ? 'Editar Foto' : 'Nueva Foto'"
+    (onClose)="cerrarModal()"
+    (onSubmit)="guardarFoto()">
+    <div class="form-group">
+      <label>Título</label>
+      <input type="text" class="form-control" [(ngModel)]="formData().titulo" required>
+    </div>
+    <div class="form-group">
+      <label>Evento</label>
+      <select class="form-control" [(ngModel)]="formData().evento">
+        <option *ngFor="let evento of eventos">{{ evento }}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Tamaño (MB)</label>
+      <input type="text" class="form-control" [(ngModel)]="formData().tamano" required>
+    </div>
+  </app-modal>
+</div>

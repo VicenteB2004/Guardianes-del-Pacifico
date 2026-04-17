@@ -1,0 +1,32 @@
+<div class="card" [class]="'accent-' + accentColor()">
+  <!-- Accent Vertical Line -->
+  <div class="card-accent"></div>
+
+  <div class="card-body">
+    <!-- Header -->
+    <div class="card-header">
+      <div class="card-title-section">
+        <h3 class="card-title">{{ title() }}</h3>
+        <p *ngIf="subtitle()" class="card-subtitle">{{ subtitle() }}</p>
+      </div>
+      <div *ngIf="badge()" class="badge" [class]="'badge-' + badge()">
+        {{ badge() }}
+      </div>
+    </div>
+
+    <!-- Content -->
+    <div class="card-content">
+      <div class="card-icon">
+        <span class="material-icons-outlined">{{ icon() }}</span>
+      </div>
+      <div class="card-value-section">
+        <p class="card-value">{{ value() }}</p>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="card-footer">
+      <ng-content></ng-content>
+    </div>
+  </div>
+</div>

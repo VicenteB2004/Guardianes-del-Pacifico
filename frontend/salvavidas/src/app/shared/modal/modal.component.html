@@ -1,0 +1,28 @@
+<div *ngIf="isOpen()" class="modal-overlay" (click)="handleClose()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h2>{{ title() }}</h2>
+      <button class="close-btn" (click)="handleClose()">✕</button>
+    </div>
+
+    <div class="modal-body">
+      <ng-content></ng-content>
+    </div>
+
+    <div class="modal-footer">
+      <button
+        class="btn btn-secondary"
+        (click)="handleClose()"
+        [disabled]="isLoading()">
+        {{ cancelText() }}
+      </button>
+      <button
+        class="btn btn-primary"
+        (click)="handleSubmit()"
+        [disabled]="isLoading()">
+        <span *ngIf="!isLoading()">{{ submitText() }}</span>
+        <span *ngIf="isLoading()">⏳ Guardando...</span>
+      </button>
+    </div>
+  </div>
+</div>

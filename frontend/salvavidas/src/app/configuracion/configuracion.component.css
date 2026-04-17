@@ -1,0 +1,272 @@
+.page-container {
+  padding: 2rem;
+}
+
+.page-header {
+  margin-bottom: 2rem;
+}
+
+.page-header h1 {
+  margin: 0;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.config-section {
+  background-color: white;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+.config-section h2 {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  color: var(--primary-dark);
+}
+
+.config-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  font-weight: 600;
+  color: var(--primary-dark);
+  font-size: 0.95rem;
+}
+
+.form-control {
+  padding: 0.75rem;
+  border: 2px solid #e5e7eb;
+  border-radius: var(--radius-sm);
+  font-size: 1rem;
+  font-family: inherit;
+  transition: var(--transition);
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: var(--primary-ocean);
+  box-shadow: 0 0 0 3px rgba(0, 119, 182, 0.1);
+}
+
+.form-control:disabled {
+  background-color: var(--gray-light);
+  cursor: not-allowed;
+}
+
+.form-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.form-buttons .btn {
+  flex: 1;
+  min-width: 150px;
+}
+
+.config-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.config-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem;
+  background-color: var(--gray-light);
+  border-radius: var(--radius-md);
+  transition: var(--transition);
+}
+
+.config-item:hover {
+  background-color: white;
+  box-shadow: var(--shadow-sm);
+}
+
+.config-info h4 {
+  margin: 0 0 0.5rem 0;
+  color: var(--primary-dark);
+}
+
+.config-desc {
+  margin: 0;
+  color: var(--gray-dark);
+  font-size: 0.9rem;
+}
+
+.config-control {
+  flex-shrink: 0;
+}
+
+/* Toggle Switch */
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 26px;
+}
+
+.toggle-input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-label {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: var(--transition);
+  border-radius: 26px;
+}
+
+.toggle-input:checked + .toggle-label {
+  background-color: var(--primary-ocean);
+}
+
+.toggle-label:before {
+  position: absolute;
+  content: '';
+  height: 20px;
+  width: 20px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: var(--transition);
+  border-radius: 50%;
+}
+
+.toggle-input:checked + .toggle-label:before {
+  transform: translateX(24px);
+}
+
+/* Select Control */
+.select-control {
+  min-width: 150px;
+}
+
+.select-control .form-control {
+  margin: 0;
+}
+
+/* Security Cards */
+.security-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.security-card {
+  padding: 1.5rem;
+  background: linear-gradient(135deg, var(--gray-light), white);
+  border: 1px solid #e5e7eb;
+  border-radius: var(--radius-md);
+  transition: var(--transition);
+}
+
+.security-card:hover {
+  box-shadow: var(--shadow-md);
+  border-color: var(--primary-ocean);
+}
+
+.security-card h3 {
+  margin: 0 0 0.5rem 0;
+  color: var(--primary-dark);
+  font-size: 1rem;
+}
+
+.security-card p {
+  margin: 0 0 1rem 0;
+  color: var(--gray-dark);
+  font-size: 0.9rem;
+}
+
+.security-card .btn {
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .page-container {
+    padding: 1.5rem;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .config-section {
+    padding: 1.5rem;
+  }
+
+  .config-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .config-control {
+    width: 100%;
+  }
+
+  .config-form {
+    gap: 1rem;
+  }
+
+  .form-buttons {
+    flex-direction: column;
+  }
+
+  .form-buttons .btn {
+    flex: 1;
+  }
+
+  .security-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-container {
+    padding: 1rem;
+  }
+
+  .config-section {
+    padding: 1rem;
+  }
+
+  .config-item {
+    padding: 1rem;
+  }
+
+  .form-buttons {
+    gap: 0.75rem;
+  }
+
+  .form-buttons .btn {
+    min-width: 100%;
+  }
+}

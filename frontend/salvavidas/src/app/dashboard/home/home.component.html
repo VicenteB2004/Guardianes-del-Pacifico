@@ -1,0 +1,56 @@
+<div class="home-container">
+  <!-- Welcome Section -->
+  <section class="welcome-section">
+    <div class="welcome-header">
+      <div>
+        <h1>Bienvenido al Sistema de Gestión</h1>
+        <p class="welcome-subtitle">Salvavidas San Clemente - {{ today.toLocaleDateString('es-ES', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) }}</p>
+      </div>
+      <div class="quick-actions">
+        <button *ngFor="let action of quickActions" 
+                class="btn btn-primary"
+                [class.btn-danger]="action.color === 'danger'">
+          <span>{{ action.icon }}</span>
+          {{ action.label }}
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Metrics Grid -->
+  <section class="metrics-section">
+    <h2>Métricas Principales</h2>
+    <div class="metrics-grid">
+      <app-card 
+        *ngFor="let metric of metrics()"
+        [icon]="metric.icon"
+        [title]="metric.title"
+        [value]="metric.value"
+        [subtitle]="metric.subtitle"
+        [accentColor]="metric.accentColor"
+        [badge]="metric.badge || ''">
+      </app-card>
+    </div>
+  </section>
+
+  <!-- Recent Incidents -->
+  <section class="incidents-section">
+    <h2>Incidentes Recientes</h2>
+    <div class="incidents-table">
+      <div class="table-header">
+        <div class="col-type">Tipo</div>
+        <div class="col-time">Hora</div>
+        <div class="col-status">Estado</div>
+      </div>
+      <div *ngFor="let incident of recentIncidents()" class="table-row">
+        <div class="col-type">{{ incident.type }}</div>
+        <div class="col-time">{{ incident.time }}</div>
+        <div class="col-status">
+          <span class="status-badge" [class]="'status-' + incident.status.toLowerCase().replace(' ', '-')">
+            {{ incident.status }}
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
